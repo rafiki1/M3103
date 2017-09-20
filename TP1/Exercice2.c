@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "time.h"
 
 double puissance(double a, int n);
 
@@ -8,12 +9,19 @@ int main() {
   int n;
 
   printf("Saisir a : ");
-  scanf("%f", &a);
+  scanf("%lf", &a);
 
-  printf("Saisir n : ");
-  scanf("%d", &n);
+  do {
+    printf("Saisir n >= 0 : ");
+    scanf("%d", &n);
+  } while(n < 0);
 
-  printf("%f", puissance(a, n));
+  clock_t t1 = clock();
+  double res = puissance(a, n);
+  clock_t t2 = clock();
+
+  printf("%f\n", res);
+  printf("%f ms\n", ((double)t2-t1)/CLOCKS_PER_SEC*1000);
 
   return 0;
 }
