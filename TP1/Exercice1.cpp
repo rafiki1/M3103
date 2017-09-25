@@ -1,5 +1,6 @@
  #include <iostream>
-/*
+#include <time.h>
+
 using namespace std;
 int main() {
 
@@ -7,6 +8,8 @@ int main() {
 	int res;
 	int sommeNPremierRec(int n);
 	int sommeNPremierIte(int n);
+	clock_t t1, t2;
+	double temps;
 
 	cout << "Saisir entier :" << endl;
 	cin >> n;
@@ -14,10 +17,12 @@ int main() {
 		cout << "Saisir entier positif  :" << endl;
 		cin >> n;
 	}
+	t1 = clock();
 	res = sommeNPremierIte(n);
-
+	t2 = clock();
 	cout <<"La somme des n premiers entier de "<<n<<" vaut :"<<res << endl;
-	
+	temps = (float)(t2 - t1) / CLOCKS_PER_SEC * 1000;
+	printf("temps = %f\n", temps, " ms");
 	system("pause");
 }
 
@@ -57,4 +62,3 @@ int sommeNPremierIte(int n) {
 	}
 	return res;
 }
-*/

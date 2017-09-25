@@ -1,0 +1,32 @@
+// Cette fonction calcul la somme des n premiers entier en itération       
+// Paramètre n: entier positif ou nul												 
+// Précondition : n>=0																 
+// retourne n premer entier
+
+Fonction sommeNPremierIte(n: entier)
+Début 
+	Avec :
+		i,res: entier
+		res<=0
+		
+		Pour i De 1 A n Faire
+			res<=res+1
+		FinFaire
+		Retourne res
+Fin
+
+
+// Cette fonction calcul la somme des n premiers entier avec la récursivité          
+// Paramètre n: entier positif ou nul												 
+// Précondition : n>=0																 
+// retourne n premer entier
+
+Fonction sommeNPremierRec(n: Entier)
+Début
+	Avec :
+		Si (n=0) Alors
+			Retourne 0
+		Sinon
+			Retourne n + sommeNPremierRec(n-1)
+		Finsi
+Fin

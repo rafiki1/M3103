@@ -22,7 +22,7 @@ int main() {
 		cin >> b;
 	}
 	t1 = clock();
-	res = pgcdRec(a, b);
+	res = pgcdIte(a, b);
 	t2 = clock();
 	cout << "Le PGCD de " << a << " et " << b << " est :" << res << endl;
 	temps = (float)(t2 - t1)/CLOCKS_PER_SEC*1000;
