@@ -1,0 +1,30 @@
+Programme exercice1 
+Début 
+	Avec:
+		i,j : Entier
+		p1, p2 : Pointeur d'Entier
+
+		i <- 2 
+		j <- 5
+
+		p1<- Adresse i
+
+		Afficher "Contenu de p1 vaut :", Contenu p1
+
+		i <- i+1
+		p2 <- p1
+		Contenu p2 <- Contenu p1 + j
+		
+		Afficher "p1 vaut: ", Contenu p1, " et p2 vaut:", Contenu p2
+		Afficher "i vaut: ", i , " et j vaut:", j
+
+		p1 <- Adresse j
+		Contenu p1 <- i+j
+
+		Afficher "p1 vaut: ", Contenu p1, " et p2 vaut:", Contenu p2
+		Afficher "i vaut: ", i , " et j vaut:", j
+
+
+Fin exercice1
+
+
