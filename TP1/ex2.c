@@ -7,11 +7,10 @@ int main() {
 	double a;
 	int n;
 	double res;
-	clock_t t1;
-	clock_t t2;
+	clock_t t1, t2;
 	double temps;
 
-	printf("Saisir a : ");
+	printf("\nSaisir a : ");
 	scanf("%lf", &a);
 
 	do {
@@ -21,14 +20,14 @@ int main() {
 	
 	//itératif
 	t1 = clock();
-	res = puissanceIte(a, n);
+	for(int i = 0 ; i < 100000 ; i++) res = puissanceIte(a, n);
 	t2 = clock();
 	temps = ( (double)(t2 - t1) / (double)CLOCKS_PER_SEC ) * (double) 1000;
 	printf("\n(Iteratif)\n%f^%d = %f\nTemps d'execution : %f ms\n", a, n, res, temps);
 	
 	//récursif
 	t1 = clock();
-	res = puissanceRec(a, n);
+	for(int i = 0 ; i < 100000 ; i++) res = puissanceRec(a, n);
 	t2 = clock();
 	temps = ( (double)(t2 - t1) / (double)CLOCKS_PER_SEC ) * (double) 1000;
 	printf("\n(Recursif)\n%f^%d = %f\nTemps d'execution : %f ms\n", a, n, res, temps);
@@ -48,18 +47,11 @@ double puissanceIte(double a, int n) {
 	
 	double res = 1.0;
 
-	if(n%2 == 0) {
-		for(int i = n/2 ; i > 0 ; i--) {
-			res *= a;
-		}
-		res = res * res;
+	for(int i = (n-(n%2))/2 ; i > 0 ; i--) {
+		res *= a;
 	}
-	else {
-		for(int i = (n-1)/2 ; i > 0 ; i--) {
-			res *= a;
-		}
-		res = a*res*res;
-	}
+	res *= res;
+	if(n%2 != 0) res *= a;
 
 	return res;
 }

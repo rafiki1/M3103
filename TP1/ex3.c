@@ -11,28 +11,28 @@ int main() {
 	double temps;
 	
 	do {
-		printf("Saisir a>0 :");
+		printf("\n    Saisir a>0 : ");
 		scanf("%d", &a);
 	} while(a <= 0);
 	
 	do {
-		printf("Saisir b>0 :");
+		printf("    Saisir b>0 : ");
 		scanf("%d", &b);
 	} while(a <= 0);
 	
 	//itératif
 	t1 = clock();
-	res = pgcdIte(a, b);
+	for(int i = 0 ; i < 100000 ; i++) res = pgcdIte(a, b);
 	t2 = clock();
 	temps = ( (double)(t2 - t1) / (double)CLOCKS_PER_SEC ) * (double) 1000;
-	printf("\n(Iteratif)\nPGCD(%d, %d) = %d\nTemps d'execution : %f ms\n", a, b, res, temps);
+	printf("\n    (Iteratif)\n    PGCD(%d, %d) = %d\n    Temps d'execution : %f ms\n", a, b, res, temps);
 	
 	//récursif
 	t1 = clock();
-	res = pgcdRec(a, b);
+	for(int i = 0 ; i < 100000 ; i++) res = pgcdRec(a, b);
 	t2 = clock();
 	temps = ( (double)(t2 - t1) / (double)CLOCKS_PER_SEC ) * (double) 1000;
-	printf("\n(Recursif)\nPGCD(%d, %d) = %d\nTemps d'execution : %f ms\n", a, b, res, temps);
+	printf("\n    (Recursif)\n    PGCD(%d, %d) = %d\n    Temps d'execution : %f ms\n", a, b, res, temps);
 
 	return 0;
 }

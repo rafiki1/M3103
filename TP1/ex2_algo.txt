@@ -38,17 +38,15 @@ Début
 		res : Réel
 	
 	res<-1.0
-
-	Si (n Mod 2 = 0) Alors
-		Pour i De n/2 A 1 Pas -1 Faire
-			res <- res * a
-		FinFaire
-		res = res * res
-	Sinon
-		Pour i De (n-1)/2 A 1 Pas -1 Faire
-			res <- res * a;
-		FinFaire
-		res <- a * res * res
+	
+	Pour i De (n-(n Mod 2))/2 A 1 Pas -1 Faire
+		res <- res * a
+	FinFaire
+	
+	res = res * res
+	
+	Si (n Mod 2 != 0) Alors
+		res <- res * a
 	FinSi
 
 	Retourne res;

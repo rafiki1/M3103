@@ -7,9 +7,6 @@ int main() {
 	int sommeNPremierRec(int n);
 	int n;
 	int res;
-	clock_t t1
-	clock_t t2;
-	double temps;
 
 	do {
 		printf("Saisir n>=0  : ");
@@ -17,18 +14,12 @@ int main() {
 	} while (n < 0);
 	
 	//itératif
-	t1 = clock();
 	res = sommeNPremierIte(n);
-	t2 = clock();
-	temps = ( (double)(t2 - t1) / (double)CLOCKS_PER_SEC ) * (double) 1000;
-	printf("\n(Iteratif)\nLa somme des %d premiers entier vaut : %d\nTemps d'execution : %f ms\n", n, res, temps);
+	printf("\n(Iteratif)\nLa somme des %d premiers entier vaut : %d\n", n, res);
 	
 	//récursif
-	t1 = clock();
 	res = sommeNPremierRec(n);
-	t2 = clock();
-	temps = ( (double)(t2 - t1) / (double)CLOCKS_PER_SEC ) * (double) 1000;
-	printf("\n(Recursif)\nLa somme des %d premiers entier vaut : %d\nTemps d'execution : %f ms\n", n, res, temps);
+	printf("\n(Recursif)\nLa somme des %d premiers entier vaut : %d\n", n, res);
 	
 	return 0;
 }
@@ -46,7 +37,6 @@ int sommeNPremierIte(int n) {
 	int res=0;
 	
 	for (int i = 1 ; i <= n ; i++) {
-		for(int j = 0 ; j < 1000 ; j++); //boucle pour allonger le temps d'execution
 		res = res+ i;
 	}
 	
@@ -62,8 +52,6 @@ int sommeNPremierIte(int n) {
 //	retourne n premer entier
 
 int sommeNPremierRec(int n) {
-	
-	for(int i = 0 ; i < 1000 ; i++); //boucle pour allonger le temps d'execution
 	
 	if (n == 0) {
 		return 0;
