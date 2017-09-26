@@ -1,0 +1,84 @@
+Programme main
+Début
+	Avec
+		a: Réel
+		n: Entier
+		res: Réel
+	
+	Afficher "Saisir a : "
+	Saisir a
+	
+	Répéter
+		Afficher "Saisir n>=0 : "
+		Saisir n
+	Tant Que n < 0
+	
+	//itératif
+	res <- puissanceIte(a, n)
+	Afficher "(Itératif) " + a + "^" + n + " = " + res
+	
+	//récursif
+	res <- puissanceRec(a, n)
+	Afficher "(Récursif) " + a + "^" + n + " = " + res
+Fin
+
+
+//	Cette fonction calcul la puissance d'un nombre "a" a la puissance "n" de manière itérative
+//	Paramètre(s) :
+//		a : nombre (Réel)
+//		n : exposant (Entier)
+//	Précondition(s) :
+//		n >= 0
+//	retourne : a^n
+
+Fonction puissanceIte(a : Réel, n : Entier) Retourne Réel
+Début
+	Avec:
+		i : Entier
+		res : Réel
+	
+	res<-1.0
+
+	Si (n Mod 2 = 0) Alors
+		Pour i De n/2 A 1 Pas -1 Faire
+			res <- res * a
+		FinFaire
+		res = res * res
+	Sinon
+		Pour i De (n-1)/2 A 1 Pas -1 Faire
+			res <- res * a;
+		FinFaire
+		res <- a * res * res
+	FinSi
+
+	Retourne res;
+Fin
+
+
+//	Cette fonction calcul la puissance d'un nombre "a" a la puissance "n" de manière récursif
+//	Paramètre(s) :
+//		a : nombre (Réel)
+//		n : exposant (Entier)
+//	Précondition(s) :
+//		n >= 0
+//	retourne : a^n
+
+Fonction puissanceRec(a : Réel, n : Entier) Retourne Réel
+Début
+	Avec:
+		res : Réel
+
+	Si (n = 0) Alors
+		res <- 1
+	Sinon
+		Si (n Mod 2 = 0) Alors
+			res <- puissanceRec(a, n/2)
+			res <- res*res
+		Sinon
+			res <- puissanceRec(a, (n-1)/2)
+			res <- a*res*res
+		FinSi
+	FinSi
+
+	Retourne res
+Fin
