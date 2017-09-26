@@ -1,0 +1,51 @@
+
+//	Cette procédure tri un tableau d'entier par ordre croissant entre deux positions avec la méthode quickSort
+//	Paramètre(s) :
+//		tab : le tableau d'entier
+//		a : position 1 (Entier)
+//		b : position 2 (Entier)
+//	Précondition(s) :
+//		a >= 0
+//		b < taille tableau
+//		a <= b
+//	Post-condition(s) :
+//		Le tableau est trié par ordre croissant
+
+Procédure quickSort(a:Entier, b:Entier ; tab : Entier[])
+Début
+	Avec:
+		i: Entier
+		j: Entier
+		pivot: Entier
+		tmp: Entier
+	
+	i <- a
+	j <- b
+	pivot <- tab[(a+b)/2
+	
+	TantQue (i <= j) Faire
+		TantQue (tab[i] < pivot) Faire
+			i<-i+1
+		FinFaire
+		
+		TantQue (tab[j] > pivot) Faire
+			j<-j-1
+		FinFaire
+		
+		Si (i <= j) Alors
+			tmp <- tab[j]
+			tab[j] <- tab[i]
+			tab[i] <- tmp
+			i<-i+1
+			j<-j-1
+		FinSi
+	FinFaire
+	
+	Si (a < j) Alors
+		quickSort(a, j; tab);
+	FinSi
+	
+	Si (i < b) Alors
+		quickSort(i, b; tab);
+	FinSi
+Fin
