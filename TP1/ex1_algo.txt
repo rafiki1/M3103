@@ -1,0 +1,61 @@
+Programme main
+Début
+	Avec:
+		Fonction sommeNPremiersEntierIte(n: Entier) Retourne Entier
+		Fonction sommeNPremiersEntierRec(n: Entier) Retourne Entier
+		n: Entier
+		res : Entier
+	
+	Répéter
+		Afficher "Saisir n>=0 : "
+		Saisir n
+	Tant Que n < 0
+	
+	//itératif
+	res <- sommeNPremiersEntierIte(n)
+	Afficher "(Itératif) La somme des " + n + " premiers entier vaut : " + res
+	
+	//récursif
+	res <- sommeNPremiersEntierRec(n)
+	Afficher "(Récursif) La somme des " + n + " premiers entier vaut : " + res
+Fin
+
+
+//	Cette fonction calcul la somme des n premiers entier de manière itérative
+//	Paramètre(s) :
+//		n : entier											 
+//	Précondition(s) :
+//		n>=0																 
+//	retourne n premer entier
+
+Fonction sommeNPremiersEntierIte(n: Entier) Retourne Entier
+Début 
+	Avec :
+		i: Entier
+		res: Entier
+		
+	res <- 0
+	
+	Pour i De 1 A n Faire
+		res <- res+1
+	FinFaire
+	
+	Retourne res
+Fin
+
+
+//	Cette fonction calcul la somme des n premiers entier de manière récursive
+//	Paramètre(s) :
+//		n : entier											 
+//	Précondition(s) :
+//		n>=0																 
+//	retourne n premer entier
+
+Fonction sommeNPremiersEntierRec(n: Entier) Retourne Entier
+Début
+	Si (n=0) Alors
+		Retourne 0
+	Sinon
+		Retourne n + sommeNPremierRec(n-1)
+	FinSi
+Fin

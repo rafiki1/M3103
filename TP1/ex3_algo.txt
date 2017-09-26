@@ -1,0 +1,79 @@
+Programme main
+Début
+	Avec:
+		Fonction pgcdIte(a: Entier, b: Entier) Retourne Entier
+		Fonction pgcdRec(a: Entier, b: Entier)  Retourne Entier
+		a: Entier
+		b: Entier
+		res: Entier
+		
+	Répéter
+		Afficher "Saisir a>0 : "
+		Saisir a
+	Tant Que n <= 0
+	
+	Répéter
+		Afficher "Saisir b> : "
+		Saisir b
+	Tant Que n <= 0
+	
+	//itératif
+	res <- pgcdIte(a, b)
+	Afficher "(Itératif) PGCD(" + a + ", " + b + ") = " + res
+	
+	//récursif
+	res <- pgcdRec(a, b)
+	Afficher "(Récursif) PGCD(" + a + ", " + b + ") = " + res
+Fin
+
+
+//	Cette fonction permet de calculer le PGCD entre 2 nombres entier de manière itérative
+//	Paramètre(s) :
+//		a: 1er entier
+//		b: 2ème entier 
+//	Précondition :
+//		a>0
+//		b>0
+//	Retourne pgcd(a,b)
+
+Fonction pgcdIte(a: Entier, b: Entier) Retourne Entier
+Début
+	Avec:
+		a2: Entier
+		b2: Entier
+	
+	a2<-a
+	b2<-b
+	
+	TantQue (a2 != b2) Faire
+		Si (a2 > b2) Alors
+			a2 <- a2-b2
+		Sinon
+			b2 <- b2-a2
+		FinSi
+	FinFaire
+	Retourne a2
+Fin
+
+
+//	Cette fonction permet de calculer le PGCD entre 2 nombres entier de manière récursive
+//	Paramètre(s) :
+//		a: 1er entier
+//		b: 2ème entier 
+//	Précondition :
+//		a>0
+//		b>0
+//	Retourne pgcd(a,b)
+
+Fonction pgcdRec(a: Entier, b: Entier)  Retourne Entier
+Début 
+	Si(a=b) Alors
+		Retourne a
+	Sinon
+		Si (a>b) Alors
+			Retourne pgcdRec(a-b,b)
+		Sinon
+			Retourne pgcdRec(a,b-a)
+		FinSi
+	FinSi
+Fin
