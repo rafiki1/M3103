@@ -11,7 +11,7 @@ set /P message="commit message : "
 if %num% == 0 (
 	git commit -m "%message%"
 ) else (
-	git commit -m "TP%numero% - %message%"
+	git commit -m "TP%num% - %message%"
 )
 
 git push
