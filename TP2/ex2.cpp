@@ -16,7 +16,7 @@ int main() {
 	*p2 = 20;
 	cout << "p1 vaut " << *p1 << " p2 vaut " << *p2 << endl;
 	tab = p1+1;
-	c = (char*)tab+3;
+	c = (char*)(tab+3);
 	gets(str);
 	c = str+2;
 	c = c+1;
