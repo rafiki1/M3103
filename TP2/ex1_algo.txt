@@ -12,6 +12,9 @@ Début
 		Afficher "Contenu de p1 vaut :", Contenu p1
 
 		i <- i+1
+		
+		Afficher "Contenu de p1 vaut :", Contenu p1
+		
 		p2 <- p1
 		Contenu p2 <- Contenu p1 + j
 		
