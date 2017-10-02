@@ -2,7 +2,9 @@
 
 int main() {
 	void quickSort(int tab[], int a, int b);
-	int tab[9] = {9, 7, 5, 6, 2, 8, 4, 3, 1};
+	int taille;
+	int* tab;
+	//int tab[9] = {9, 7, 5, 6, 2, 8, 4, 3, 1};
 	
 	quickSort(tab, 0, 8);
 	
