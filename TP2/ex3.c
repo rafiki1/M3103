@@ -1,19 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
 	void quickSort(int tab[], int a, int b);
 	int taille;
 	int* tab;
-	//int tab[9] = {9, 7, 5, 6, 2, 8, 4, 3, 1};
 	
-	quickSort(tab, 0, 8);
+	printf("\n");
+	do {
+		printf("taille du tableau ( >0 ) : ");
+		scanf("%d", &taille);
+	} while(taille <= 0);
+	
+	tab = malloc(taille*sizeof(int));
+	
+	printf("\n");	
+	for(int i = 0 ; i < taille ; i++) {
+		printf("nb %d : ", i+1);
+		scanf("%d", tab+i);
+	}
+	
+	quickSort(tab, 0, taille-1);
 	
 	printf("\n{");
-	for(int i = 0 ; i < 8 ; i++) {
-		printf("%d, ", tab[i]);
+	for(int i = 0 ; i < taille-1 ; i++) {
+		printf("%d, ", *(tab+i));
 	}
-	printf("%d}\n", tab[8]);
+	printf("%d}\n", *(tab+taille-1));
 	
+	free(tab);	
 	return 0;
 }
 
