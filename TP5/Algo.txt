@@ -1,0 +1,263 @@
+Module ListeCirculaire {
+	Type Maillon = {
+		numero : Entier
+		suivant : Pointeur Maillon
+	}
+	
+	Type ListeCirculaire = Pointeur Maillon
+	
+	// Cette fonction créé une nouvelle ListeCirculaire
+	// retourne : nouvelle ListeCirculaire
+	Fonction creerListe() Retourne ListeCirculaire
+	
+	// Cette fonction détruit une ListeCirculaire
+	// paramètres :
+	//		liste : la liste circulaire
+	Procédure detruireListe(liste : ListeCirculaire ; liste : ListeCirculaire)
+	
+	// Cette procédure permet d'afficher une liste circulaire
+	// Paramètres : 
+	//		liste : la liste circulaire
+	Procédure afficher(liste : ListeCirculaire)
+	
+	// Cette procédure effectue une rotation d'une liste circulaire
+	// paramètres :
+	//		liste : la liste circulaire	
+	Procédure rotation(liste : ListeCirculaire ; liste : ListeCirculaire)
+	
+	// Cette procédure insert une valeur dans une liste circulaire
+	// paramètres :
+	//		liste : la liste circulaire
+	//		numero : valeur a inserer
+	Procédure inserer(liste : ListeCirculaire, numero : Entier ; liste : ListeCirculaire)
+	
+	// Cette procédure supprime le dernier element d'une liste circulaire
+	// paramètres :
+	//		liste : la liste circulaire	
+	Procédure supprimerDernier(liste : ListeCirculaire ; liste : ListeCirculaire)
+	
+	// Cette fonction retourne la taille d'une liste circulaire
+	// Paramètres : 
+	//		liste : la liste circulaire
+	// retourne : le nombre de maillons de la liste
+	Fonction taille(liste : ListeCirculaire) Retourne Entier
+}
+
+Programme gestionListeCirculaire
+Début
+	Avec :
+		liste : ListeCirculaire
+		choix : Entier
+		quitter : Booleen
+		num : Entier
+		tailleListe : Entier
+		
+	liste <- creerListe()
+	quitter <- FAUX
+	
+	Répéter
+		Afficher "1) inserer une valeur"
+		Afficher "2) afficher la liste"
+		Afficher "3) rotation de la liste"
+		Afficher "4) taille de la liste"
+		Afficher "5) supprimer le dernier element"
+		Afficher "6) quitter"
+		
+		Afficher "choix : "
+		Saisir choix
+		
+		Selon choix Faire
+			Cas 1:
+				Afficher "Saisir la valeur a inserer : "
+				Saisir num
+				inserer(liste, num ; liste)
+			Cas 2:
+				afficher(liste)
+			Cas 3:
+				rotation(liste ; liste)
+			Cas 4:
+				tailleListe <- taille(liste)
+				
+				Si tailleListe = 0 Alors
+					Afficher "La liste est vide"
+				Sinon
+					Afficher "La liste contient ", tailleListe, "élements"
+				FinSi
+			Cas 5:
+				supprimerDernier(liste ; liste)
+			Cas 6:
+				detruireListe(liste ; liste)
+			Défaut :
+				Afficher "Erreur de saisie"
+		FinFaire
+		
+	TantQue Non quitter
+Fin
+
+// Cette fonction créé une nouvelle ListeCirculaire
+// retourne : nouvelle ListeCirculaire
+Fonction creerListe() Retourne ListeCirculaire
+Début
+	Retourne NULL
+Fin
+
+// Cette fonction détruit une ListeCirculaire
+// paramètres :
+//		liste : la liste circulaire
+Procédure detruireListe(liste : ListeCirculaire ; liste : ListeCirculaire)
+Début
+	TantQue liste != NULL
+		supprimerDernier(liste ; liste)
+	FinTantQue
+Fin
+
+// Cette procédure permet d'afficher une liste circulaire
+// Paramètres : 
+//		liste : la liste circulaire
+Procédure afficher(liste : ListeCirculaire)
+Début
+	Avec : 
+		debut : Pointeur Maillon
+		
+	Si liste = NULL
+		Afficher "La liste est vide"
+		Retourne
+	FinSi
+	
+	debut <- liste
+	
+	Répéter
+		Afficher (Contenu liste).numero
+		rotation(liste ; liste)
+	TantQue liste != debut
+Fin
+
+// Cette procédure effectue une rotation d'une liste circulaire
+// paramètres :
+//		liste : la liste circulaire	
+Procédure rotation(liste : ListeCirculaire ; liste : ListeCirculaire)
+Début
+	Si liste != NULL Alors
+		liste <- (Contenu liste).suivant
+	FinSi
+Fin
+
+// Cette procédure insert une valeur dans une liste circulaire
+// paramètres :
+//		liste : la liste circulaire
+//		numero : valeur a inserer
+Procédure inserer(liste : ListeCirculaire, numero : Entier ; liste : ListeCirculaire)
+Début
+	Avec :
+		nouvMaillon : Pointeur Maillon
+		dernierMaillon : Pointeur Maillon
+	
+	nouvMaillon <- Nouveau Maillon
+	
+	(Contenu nouvMaillon).numero <- numero
+	
+	Si liste = NULL Alors
+		(Contenu nouvMaillon).suivant <- nouvMaillon
+	Sinon
+		(Contenu nouvMaillon).suivant <- liste
+		
+		dernierMaillon <- dernier(liste)
+		(Contenu dernierMaillon).suivant <- nouvMaillon
+	FinSi
+	
+	liste <- nouvMaillon
+Fin
+
+// Cette procédure supprime le dernier element d'une liste circulaire
+// paramètres :
+//		liste : la liste circulaire	
+Procédure supprimerDernier(liste : ListeCirculaire ; liste : ListeCirculaire)
+Début
+	Avec
+		dernierMaillon : Pointeur Maillon
+		avantDernierMaillon : Pointeur Maillon
+		
+	Si liste = NULL Alors
+		Retourne
+	FinSi
+	
+	dernierMaillon <- dernier(liste)
+	
+	Si dernierMaillon = (Pointeur Maillon)liste Alors
+		Detruire dernierMaillon
+		liste <- NULL
+	Sinon
+		avantDernierMaillon <- avantDernier(liste)
+		
+		(Contenu avantDernierMaillon).suivant <- liste
+		Detruire dernierMaillon
+	FinSi
+Fin
+
+// Cette fonction retourne la taille d'une liste circulaire
+// Paramètres : 
+//		liste : la liste circulaire
+// retourne : le nombre de maillons de la liste
+Fonction taille(liste : ListeCirculaire) Retourne Entier
+Début
+	Avec : 
+		debut : Pointeur Maillon
+		i : Entier
+		
+	Si liste = NULL
+		Retourne 0
+	FinSi
+	
+	debut <- liste
+	i <- 0
+	Répéter
+		rotation(liste ; liste)
+		i <- i + 1
+	TantQue liste != debut
+	
+	Retourne i
+Fin
+
+// Cette fonction retourne un pointeur vers l'avant dernier maillon de la chaine
+// Cette fonction est interne au module
+//	paramètres :
+//		liste : la liste
+// retourne : le pointeur de l'avant dernier maillon
+Fonction avantDernier(ListeCirculaire liste) Retourne Pointeur Maillon
+Début
+	Avec : 
+		avatDernierMaillon : Pointeur Maillon
+		debut : Pointeur Maillon
+	
+	debut <- liste
+	
+	Répéter
+		avatDernierMaillon <- liste;
+		rotation(liste ; liste)
+	TantQue (Contenu liste).suivant != debut
+	
+	rotation(liste ; liste)
+	
+	Retourne avatDernierMaillon
+Fin
+
+// Cette fonction retourne un pointeur vers le dernier maillon de la chaine
+// Cette fonction est interne au module
+//	paramètres :
+//		liste : la liste
+// retourne : le pointeur du dernier maillon
+Fonction avantDernier(ListeCirculaire liste) Retourne Pointeur Maillon
+Début
+	Avec : 
+		dernierMaillon : Pointeur Maillon
+		debut : Pointeur Maillon
+	
+	debut <- liste
+	
+	Répéter
+		dernierMaillon <- liste;
+		rotation(liste ; liste)
+	TantQue liste != debut
+	
+	Retourne dernierMaillon
+Fin
