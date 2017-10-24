@@ -1,0 +1,89 @@
+Module File {
+	Type Maillon = {
+		nom : Chaine
+		suivant : Pointeur Maillon
+	}
+	
+	Type FileAttente = {
+		tete : Pointeur Maillon
+		queue : Pointeur Maillon
+	}
+	
+	//Cette procédure permet d'ajouter une personne à la queue  de la file d'attente
+	//Paramètres :
+	//		file : la file d'attente
+	//		nom : le nom de la personne
+	Procédure ajouterEnQueue(file : Pointeur FileAttete, nom : Chaine)
+	Début
+		Avec:
+			nouveauMaillon : Pointeur Maillon
+		
+		nouveauMaillon = Nouveau Maillon
+		(Contenu nouveauMaillon).nom <- nom
+		(Contenu nouveauMaillon).suivant = NULL
+		
+		Si (Contenu file).tete = NULL Alors
+			(Contenu file).tete <- nouveauMaillon
+		Sinon
+			(Contenu (Contenu file).queue).suivant <- nouveauMaillon
+		FinSi
+		
+		(Contenu file).tete <- nouveauMaillon
+	Fin
+	
+	//Cette procédure permet de retirer la personne en tete de la file d'attente
+	//Paramètres :
+	//		file : la file d'attente
+	Procédure retirerEnTete(file : Pointeur FileAttente)
+	Début
+		Avec :
+			tmp : Pointeur Maillon
+			
+		Si (Contenu file).tete = NULL Alors
+			Retourne
+		FinSi
+		
+		tmp <- (Contenu file).tete
+		(Contenu file).tete <- (Contenu tmp).suivant
+		detruire tmp
+	FinSi
+	
+	//Cette fonction retourne le nom de la personne en tete de la file d'attente
+	//Paramètre :
+	//		file : la file d'attente
+	//retourne : le nom dela personne en tete
+	Fonction consulterEnTete(file : FileAttente) Retourne Chaine
+	Début
+		Retourne (Contenu (Contenu file).tete).nom
+	Fin
+	
+	//Cette fonction retourne le nombre de personne dans la file d'attente
+	//Paramètres :
+	//		file : file d'attente
+	//retourne : le nombre de personne dans la file d'attente
+	Fonction longueurFile(file : FileAttente) Retourne Entier
+	Début
+		Avec : 
+			compteur : Entier
+			tmp : Pointeur Maillon
+		
+		compteur <- 0
+		tmp <- (Contenu file).tete
+		
+		TantQue tmp != NULL Faire
+			tmp <- (Contenu tmp).suivant
+		FinFaire
+		
+		Retourne compteur
+	Fin
+	
+	//Cette procédure retire toutes les personne
+	//Paramètres : 
+	//		file : la file d'attente
+	Procédure vider(file : Pointeur FileAttente)
+	Début
+		TantQue (Contenu file).tete != NULL Faire
+			retirerEnTete((Contenu file).tete)
+		FinFaire
+	Fin
+}
