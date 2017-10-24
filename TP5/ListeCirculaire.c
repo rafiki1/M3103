@@ -120,6 +120,8 @@ int taille(ListeCirculaire liste) {
 // Cette fonction est interne au module
 //	paramètres :
 //		liste : la liste
+// préconditions :
+//		liste non null
 // retourne : le pointeur de l'avant dernier maillon
 Maillon* avantDernier(ListeCirculaire liste) {
 	
@@ -140,6 +142,8 @@ Maillon* avantDernier(ListeCirculaire liste) {
 // Cette fonction est interne au module
 //	paramètres :
 //		liste : la liste
+// préconditions :
+//		liste non null
 // retourne : le pointeur du dernier maillon
 Maillon* dernier(ListeCirculaire liste) {
 	
