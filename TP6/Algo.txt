@@ -1,0 +1,300 @@
+Module Arbre {
+	Type Elt = Char
+	
+	Type Noeud = {
+		etiquette : Elt
+		ag : Pointeur Noeud
+		ad : Pointeur Noeud
+	}
+	
+	Type Abin = Pointeur Noeud
+	
+	//Cette fonction initialise un arbre et le retourne
+	//retourne : un arbre initialisé
+	Fonction init() Retourne Abin
+	
+	//Cette Procédure libère un arbre et tout ses sous arbre de la mémoire
+	//paramètres : 
+	//		a : l'arbre
+	//préconditions : non estVide(a)
+	//postcondition : non estVide(a) (Mémoire libérée mais pointeur non NULL)
+	Procédure desinit(a : Abin)
+	
+	//Cette fonction retourne un nouvel arbre après lui avoir attribué une étiquette, un arbre gauche et un arbre droit
+	//paramètre :
+	//	e : l'étiquette
+	//	ag : l'arbre gauche
+	//	ad : l'arbre droit
+	//retourne : le nouvel arbre
+	Fonction enracine(e : Elt, ag : Abin, ad : Abin) Retourne Abin
+	
+	//Cette fonction retourne l'arbre gauche d'un arbre a
+	//paramètres :
+	//	a : un arbre
+	//préconditions : non estVide(a)
+	//retourne : l'arbre gauche de a
+	Fonction gauche(a : Abin) Retourne Abin
+	
+	//Cette fonction retourne l'arbre droit d'un arbre a
+	//paramètres :
+	//	a : un arbre
+	//préconditions : non estVide(a)
+	//retourne : l'arbre droit de a
+	Fonction droite(a: Abin) Retourne Abin
+	
+	//Cette fonction détermine si un arbre est vide ou non
+	//paramètre :
+	//		a : l'arbre
+	//retourne : 1 (VRAI) si a est vide  OU  0 (FAUX) si a n'est pas vide
+	Fonction estVide(a : Abin) Retourne Booleen
+	
+	//Cette fonction calcul la hauteur d'un arbre
+	//paramètre
+	//		a : l'arbre
+	//préconditions : non estVide(a)
+	//retourne : la hauteur de a
+	Fonction hauteur(a : Abin) Retourne Entier
+	
+	//Cette fonction renvoie la racine d'un arbre abort
+	//paramètre
+	//		a : l'arbre
+	//préconditions : non estVide(a)
+	Fonction racine(a : Abin) Retourne Elt
+	
+	//Cette Procédure parcour en largeur avec affichage un arbre a
+	//paramètre :
+	//		a : l'arbre
+	//préconditions : non estVide(a)
+	Procédure parcourLargeur(a : Abin)
+	
+	//Cette Procédure parcour en profondeur préfixe avec affichage un arbre a
+	//paramètre :
+	//		a : l'arbre
+	//préconditions : non estVide(a)
+	Procédure parcourProfondeurPrefixe(a : Abin)
+	
+	//Cette Procédure parcour en profondeur infixe avec affichage un arbre a
+	//paramètre :
+	//		a : l'arbre
+	//préconditions : non estVide(a)
+	Procédure parcourProfondeurInfixe(a : Abin)
+	
+	//Cette Procédure parcour en profondeur postfixe avec affichage un arbre a
+	//paramètre :
+	//		a : l'arbre
+	//préconditions : non estVide(a)
+	Procédure parcourProfondeurPostfixe(a : Abin)
+	
+	//Cette Procédure affiche une ligne d'un arbre
+	//paramètre :
+	//		a : l'arbre
+	//		numLigne : le numéro de la ligne a afficher
+	//préconditions : non estVide(a)
+	Procédure afficherLigne(a : Abin, numLigne : Entier)
+}
+
+
+
+
+//Cette fonction initialise un arbre et le retourne
+//retourne : un arbre initialisé
+Fonction init() Retourne Abin
+Début
+	Retourne NULL
+Fin
+
+//Cette Procédure libère un arbre et tout ses sous arbre de la mémoire
+//paramètres : 
+//		a : l'arbre
+//préconditions : non estVide(a)
+//postcondition : non estVide(a) (Mémoire libérée mais pointeur non NULL)
+Procédure desinit(a : Abin)
+Début
+	Si Non estVide(gauche(a)) Alors
+		desinit(gauche(a))
+	FinSi
+	
+	Si Non estVide(droite(a)) Alors
+		desinit(droite(a))
+	FinSi
+	
+	Detruire a
+Fin
+
+//Cette fonction retourne un nouvel arbre après lui avoir attribué une étiquette, un arbre gauche et un arbre droit
+//paramètre :
+//	e : l'étiquette
+//	ag : l'arbre gauche
+//	ad : l'arbre droit
+//retourne : le nouvel arbre
+Fonction enracine(e : Elt, ag : Abin, ad : Abin) Retourne Abin
+Début
+	Avec
+		arbre : Abin
+	
+	arbre <- Nouveau Noeud
+	
+	(Contenu arbre).etiquette <- e
+	(Contenu arbre).ag <- ag
+	(Contenu arbre).ad <- ad
+	
+	Retourne arbre
+Fin
+
+//Cette fonction retourne l'arbre gauche d'un arbre a
+//paramètres :
+//	a : un arbre
+//préconditions : non estVide(a)
+//retourne : l'arbre gauche de a
+Fonction gauche(a : Abin) Retourne Abin
+Début
+	Retourne (Contenu a).ag
+Fin
+
+//Cette fonction retourne l'arbre droit d'un arbre a
+//paramètres :
+//	a : un arbre
+//préconditions : non estVide(a)
+//retourne : l'arbre droit de a
+Fonction droite(a: Abin) Retourne Abin
+Début
+	Retourne (Contenu a).ad
+Fin
+
+//Cette fonction détermine si un arbre est vide ou non
+//paramètre :
+//		a : l'arbre
+//retourne : 1 (VRAI) si a est vide  OU  0 (FAUX) si a n'est pas vide
+Fonction estVide(a : Abin) Retourne Booleen
+Début
+	Retourne a = NUL
+Fin
+
+//Cette fonction calcul la hauteur d'un arbre
+//paramètre
+//		a : l'arbre
+//préconditions : non estVide(a)
+//retourne : la hauteur de a
+Fonction hauteur(a : Abin) Retourne Entier
+Début
+	Avec
+		hg : Entier
+		hd : Entier
+	
+	Si Non estVide(gauche(a)) Alors
+		hg <- hauteur(gauche(a)) + 1
+	Sinon
+		hg <- 0
+	FinSi
+	
+	Si Non estVide(droite(a)) Alors
+		hd <- hauteur(droite(a)) + 1
+	Sinon
+		hd <- 0
+	FinSi
+	
+	Si hg >= hd
+		Retourne hg
+	Sinon
+		Retourne hd
+	FinSi
+Fin
+
+//Cette fonction renvoie la racine d'un arbre abort
+//paramètre
+//		a : l'arbre
+//préconditions : non estVide(a)
+Fonction racine(a : Abin) Retourne Elt
+Début
+	Retourne (Contenu a).etiquette
+Fin
+
+//Cette Procédure parcour en largeur avec affichage un arbre a
+//paramètre :
+//		a : l'arbre
+//préconditions : non estVide(a)
+Procédure parcourLargeur(a : Abin)
+Début
+	Avec
+		h : Entier
+	
+	h <- hauteur(a)
+	
+	Afficher racine(a)
+	
+	Pour i de 1 à h Faire
+		afficherLigne(a, i)
+	FinFaire
+Fin
+
+//Cette Procédure parcour en profondeur préfixe avec affichage un arbre a
+//paramètre :
+//		a : l'arbre
+//préconditions : non estVide(a)
+Procédure parcourProfondeurPrefixe(a : Abin)
+Début
+
+	Afficher racine(a)
+
+	Si Non estVide(gauche(a))
+		parcourProfondeurPrefixe(gauche(a))
+	FinSi
+	
+	Si Non estVide(droite(a))
+		parcourProfondeurPrefixe(droite(a))
+	FinSi
+Fin
+
+//Cette Procédure parcour en profondeur infixe avec affichage un arbre a
+//paramètre :
+//		a : l'arbre
+//préconditions : non estVide(a)
+Procédure parcourProfondeurInfixe(a : Abin)
+Début
+	Si Non estVide(gauche(a))
+		parcourProfondeurInfixe(gauche(a))
+	FinSi
+	
+	Afficher racine(a)
+	
+	Si Non estVide(droite(a))
+		parcourProfondeurInfixe(droite(a))
+	FinSi
+Fin
+
+//Cette Procédure parcour en profondeur postfixe avec affichage un arbre a
+//paramètre :
+//		a : l'arbre
+//préconditions : non estVide(a)
+Procédure parcourProfondeurPostfixe(a : Abin)
+Début
+	Si Non estVide(gauche(a))
+		parcourProfondeurPostfixe(gauche(a))
+	FinSi
+	
+	Si Non estVide(droite(a))
+		parcourProfondeurPostfixe(droite(a))
+	FinSi
+	
+	Afficher racine(a)
+Fin
+
+//Cette Procédure affiche une ligne d'un arbre
+//paramètre :
+//		a : l'arbre
+//		numLigne : le numéro de la ligne a afficher
+//préconditions : non estVide(a)
+Procédure afficherLigne(a : Abin, numLigne : Entier)
+Début
+	Si numLigne = 0 Alors
+		Afficher racine(a)
+	Sinon
+		Si Non estVide(gauche(a))
+			afficherLigne(gauche(a), numLigne - 1)
+		FinSi
+		
+		Si Non estVide(droite(a))
+			afficherLigne(droite(a), numLigne - 1)
+		FinSi
+	FinSi
+FinSi
